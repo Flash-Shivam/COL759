@@ -242,7 +242,7 @@ int main(int argc, char const *argv[]) {
           q++;
         }
 
-        cout << plaintext[i] ;
+       
       }
 
   return 0;
