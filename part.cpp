@@ -7,6 +7,19 @@ using namespace std;
 
 #define lld long long int
 
+int mod_inverse(int x)
+{
+  int i,j;
+  for(i=1;i<=26;i++)
+  {
+    j = i*x;
+    if(j%26==1)
+    {
+      return i;
+    }
+  }
+  return i;
+}
 
 void getCofactor(int **a, int **temp, int p, int q, int x){
   int i=0,j=0,row,col;
@@ -126,7 +139,7 @@ int main(int argc, char const *argv[]) {
 
 
       int **adj;
-      float inverse[n][n];
+      double inverse[n][n];
 
       adj = new int* [n];
 
@@ -137,13 +150,16 @@ int main(int argc, char const *argv[]) {
 
       int det = determinant(a, n, n);
 
+      int d =  mod_inverse(det);
+
       adjoint(a, adj,n);
 
       for (i = 0 ;i < n; i++) {
 
         for (j = 0; j < n; j++) {
 
-           inverse[i][j] = float(adj[i][j])/det;
+           inverse[i][j] = double(d*adj[i][j]);
+
 
         }
 
@@ -167,25 +183,35 @@ int main(int argc, char const *argv[]) {
       for(i=0;i<z;i++)
       {
           e[i] = r.at(i) - 97;
+
       }
+
       int m = z/key_length;
       m = m * key_length;
       for(i=0;i<m;i=i+key_length)
       {
           for(c=0;c<key_length;c++)
           {
-            float w=0;
+            double w=0;
             for(j=i;j<i+key_length;j++)
             {
                w += inverse[c][j-i]*e[j];
 
                // w = w % 26;
             }
+            int w_prime = (int(w))%26;
+            if(w_prime<0)
+            {
+              w_prime = w_prime+ 26;
+            }
 
-              f[i+c] = (int(w))%26;
+
+              f[i+c] = w_prime;
 
 
           }
+
+          
 
       }
 
