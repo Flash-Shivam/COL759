@@ -1,0 +1,54 @@
+There are 3 cpp files part2.cpp , part3.cpp , decipher.cpp .
+part2.cpp (obtains key for keylength = 2)
+part3.cpp (obtains key for keylength = 3)
+decipher.cpp (writes plaintext from the key obtained).
+
+
+How to run for key length = 2;
+
+first the cipher text must be present in ciphertext.txt .
+--------------------
+g++ -o part2 part2.cpp
+
+./part2
+
+in re
+
+g++ -o decipher decipher.cpp
+
+2
+
+--------------------
+
+after executing ./part2
+
+we get the key in key.txt file .
+
+in line 15 "in","re" are the digraphs .(most occurring one is the first).
+
+the output plaintext is obtained in output.text
+
+How to run for key length = 3;
+
+first the cipher text must be present in ciphertext.txt .
+--------------------
+g++ -o part3 part3.cpp
+
+./part3
+
+the and tha
+
+g++ -o decipher decipher.cpp
+
+3
+
+--------------------
+
+after executing ./part3
+
+we get the key in key.txt file .
+
+
+in line 39 "the","and","tha" are the trigraphs .(most occurring one is the first).
+
+the output plaintext is obtained in output.text
