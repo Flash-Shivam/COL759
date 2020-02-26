@@ -15,7 +15,7 @@ def int_list(text):
     return a
 
 
-def E_vigenere(text,key):
+def e_vigenere(text,key):
     m = len(key)
     index = 0
     int_key = int_list(key)
@@ -26,7 +26,7 @@ def E_vigenere(text,key):
     return int_text
 
 
-def D_vigenere(text,key):
+def d_vigenere(text,key):
     m = len(key)
     index = 0
     int_key = int_list(key)
@@ -49,13 +49,24 @@ def text_to_int(text):
     return res
 
 
-def E_Rsa(text,public_key,n):
+def int_to_text(num):
+    res = ""
+    if num == 0:
+        res = '0' + res 
+        return res
+    while num > 0:
+        res = res + chr(97+num%26)
+        num = num / 26
+    return res
+
+
+def e_Rsa(text,public_key,n):
     m = text_to_int(text)
     e = text_to_int(public_key)
     return pow(m,e,n)
 
 
-def D_Rsa(text,private_key,n):
+def d_Rsa(text,private_key,n):
     c = text_to_int(text)
     d = text_to_int(private_key)
     return pow(c,d,n)
@@ -88,6 +99,8 @@ a = sympy.nextprime(1030)
 b = sympy.nextprime(a)
 print(a,b)
 print(strong_prime(a,b))
-var = message(E_vigenere("cryptanalysis","code"))
+var = message(e_vigenere("cryptanalysis","code"))
 print(var)
-print(message(D_vigenere(var,"code")))
+print(message(d_vigenere(var,"code")))
+m = (text_to_int("hellomikes"))
+print(int_to_text(m),m)
