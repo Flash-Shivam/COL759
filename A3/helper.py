@@ -52,7 +52,7 @@ def text_to_int(text):
 def int_to_text(num):
     res = ""
     if num == 0:
-        res = '0' + res 
+        res = '0' + res
         return res
     while num > 0:
         res = res + chr(97+num%26)
@@ -94,13 +94,21 @@ def strong_prime(s,t):
         p = x + 2*r*s*start
     return p
 
-a = sympy.nextprime(1030)
 
-b = sympy.nextprime(a)
-print(a,b)
-print(strong_prime(a,b))
-var = message(e_vigenere("cryptanalysis","code"))
-print(var)
-print(message(d_vigenere(var,"code")))
-m = (text_to_int("hellomikes"))
-print(int_to_text(m),m)
+
+def divide_blocks(text,num):
+    int_list1 = int_list(text)
+    r = []
+    res = int_list1[0]
+    p = 1
+    for i in range(1,len(int_list1)):
+        p = 26*p
+        add = int_list1[i]*p
+        if res + add > num:
+            r.append(res)
+            res = int_list1[i]
+            p = 1
+        else:
+            res = res + add
+    r.append(res)
+    return r
