@@ -63,25 +63,13 @@ def int_to_text(num):
 def e_Rsa(text,public_key,n):
     m = text_to_int(text)
     e = text_to_int(public_key)
-    res = pow(m,e,n)
-    res = res %n
-    if res > n:
-        res = res - n
-    if res < 0:
-        res = res + n
-    return res
+    return pow(m,e,n)
 
 
 def d_Rsa(text,private_key,n):
     c = text_to_int(text)
     d = text_to_int(private_key)
-    res = pow(c,d,n)
-    res = res %n
-    if res > n:
-        res = res - n
-    if res < 0:
-        res = res + n
-    return res
+    return pow(c,d,n)
 
 
 def strong_prime(s,t):

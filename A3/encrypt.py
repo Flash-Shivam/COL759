@@ -1,11 +1,11 @@
 from helper import e_vigenere,int_to_text,text_to_int,e_Rsa,d_Rsa,message,divide_blocks
 
-message1 = "ilikeprogramming"
+message1 = "shivamjadhavisahandsomeman"
 
-key = "cpp"
+key = "kerboros"
 
 encrypted_message1 = message(e_vigenere(message1,key))
-print("Encrypted Message - " + encrypted_message1)
+
 # user_publickey = "pi"
 usernum = 1
 rusername = 2
@@ -24,69 +24,56 @@ user_privatekey = l[0]
 rpublic_key = list_of_keys[2*rusername-2]
 rnum = text_to_int(list_of_keys[2*rusername-1])
 
-print(user_privatekey,list_of_keys[2*usernum-1])
-print(rpublic_key,list_of_keys[2*rusername-1])
-num1 = min(rnum,user_num)
-
+#print(list_of_keys[2*usernum-1],user_privatekey)
+#print(rpublic_key,list_of_keys[2*rusername-1])
+num = min(user_num,rnum)
 cipher = []
 key_cipher = []
-encrypted_message_list = divide_blocks(encrypted_message1,num1)
-key_list = divide_blocks(key,num1)
-
-print(encrypted_message_list,key_list)
-
-var = "jo"
-
+encrypted_message_list = divide_blocks(encrypted_message1,num)
+key_list = divide_blocks(key,num)
+# print(encrypted_message_list,key_list)
+# print(num,user_num-rnum,rnum)
 for i in range(0,len(encrypted_message_list)):
     m = int_to_text(encrypted_message_list[i])
-    temp = int_to_text(d_Rsa(m,user_privatekey,user_num))
-    cipher.append(temp)
-    mtemp= int_to_text(e_Rsa(temp,var,user_num))
-    print(m,mtemp)
-print("----------")
+    cipher.append(int_to_text(d_Rsa(m,user_privatekey,user_num)))
+    # print(m,int_to_text(e_Rsa(cipher[i],"rg",user_num)))
+
 for i in range(0,len(key_list)):
     k = int_to_text(key_list[i])
-    temp = int_to_text(d_Rsa(k,user_privatekey,user_num))
-    key_cipher.append(temp)
-    temp1 = int_to_text(e_Rsa(temp,var,user_num))
-    print(k,temp1)
-print("----------")
+    key_cipher.append(int_to_text(d_Rsa(k,user_privatekey,user_num)))
+    # print(k,int_to_text(e_Rsa(key_cipher[i],"rg",user_num)))
+
+m_prime = ""
+for i in cipher:
+    m_prime = m_prime + i
+k_prime = ""
+for i in key_cipher:
+    k_prime = k_prime + i
+
+cipher1 =  divide_blocks(m_prime,num)
+key_cipher1 = divide_blocks(k_prime,num)
+# print(cipher1)
+# print(key_cipher1)
+
 final_cipher = []
 final_key_cipher = []
 f = open("cipher.txt","w")
-
-
-y = []
-for i in range(0,len(encrypted_message_list)):
-    l = divide_blocks(cipher[i],num1)
-    for j in l:
-        y.append(int_to_text(j))
-z = []
-for i in range(0,len(key_list)):
-    l = divide_blocks(key_cipher[i],num1)
-    for j in l:
-        z.append(int_to_text(j))
-
-
-
-for i in range(0,len(y)):
-    m = (y[i])
+for i in range(0,len(cipher1)):
+    m = int_to_text(cipher1[i])
     temp = int_to_text(e_Rsa(m,rpublic_key,rnum))
-    temp1 = int_to_text(d_Rsa(temp,"rdcajlzu",rnum))
-    print(m,temp1,text_to_int(temp1),text_to_int(m))
-    # print(temp)
     final_cipher.append(temp)
+    # print(m,int_to_text(d_Rsa(temp,"bzwlzn",rnum)))
     f.write(temp + " ")
 f.close()
-print("----------")
+
+
 f = open("cipher_key.txt","w")
-for i in range(0,len(z)):
-    k = (z[i])
+for i in range(0,len(key_cipher1)):
+    k = int_to_text(key_cipher1[i])
     temp = int_to_text(e_Rsa(k,rpublic_key,rnum))
-    temp1 = int_to_text(d_Rsa(temp,"rdcajlzu",rnum))
-    print(k,temp1)
+    # print(k,int_to_text(d_Rsa(temp,"bzwlzn",rnum)))
     final_key_cipher.append(temp)
     f.write(temp + " ")
 f.close()
-print("----------")
+
 print(final_cipher,final_key_cipher)
