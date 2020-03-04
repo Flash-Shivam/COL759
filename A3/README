@@ -1,0 +1,20 @@
+There are 4 files encrypt.py,decrypt.py,helper.py,central.py
+
+1. central.py (Central Authority Generates Keys private, public)  
+    Public keys of each user is written in public key directory
+    Pivate keys are written in the file of the corresponding user
+
+
+2. encrypt.py
+
+   Writes encrypted message in cipher file
+   FOR default there are only two users
+
+3. decrypt.py
+   Recipent Reads the encrypted data decrypts it and prints Plaintext .
+
+
+4. helper.py
+  Contains function for generating strong prime using Gordon Algorithm
+  ,Dividing the string in blocks, encryption,decryption through RSA,Vigenere encryption
+  methods.
